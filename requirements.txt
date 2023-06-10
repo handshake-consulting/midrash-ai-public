@@ -1,0 +1,17 @@
+Flask==2.3.2
+google-auth==2.17.3
+google-cloud-storage==2.8.0
+python-dotenv==1.0.0
+openai==0.27.4
+pinecone-client==2.2.1
+requests==2.28.2
+ai21==1.0.7
+gunicorn==20.1.0
+tiktoken==0.3.3
+ffmpeg==1.4
+langchain==0.0.149
+unstructured==0.6.1
+python-pptx==0.6.21
+pydub==0.25.1
+SpeechRecognition==3.10.0
+bcrypt==4.0.1

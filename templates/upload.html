@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Upload Document</h1>
+	<form method="POST" enctype="multipart/form-data" id="uploadForm">
+		<input type="file" name="file" id="fileInput">
+		<input type="button" value="Upload" id="uploadButton">
+	</form>
+	<div id="status"></div>
+	<script>
+		$(document).ready(function() {
+			$('#uploadButton').click(function() {
+				var form_data = new FormData($('#uploadForm')[0]);
+				$.ajax({
+					type: 'POST',
+					url: '/upload',
+					data: form_data,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						$('#status').html(response);
+					},
+					error: function(xhr, status, error) {
+						console.log(xhr);
+						console.log(status);
+						console.log(error);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+

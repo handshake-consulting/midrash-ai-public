@@ -1,0 +1,38 @@
+keywords: # Keywords section 
+# Each keyword must be used in at least one message to be stored 
+# by the storage adapter if applicable.
+# They do not need to be in each endpoint.
+  - documentcontent: # Name of the keyword
+      store: pinecone # Database the keyword comes from
+      key: metadata/content # Key used to find information
+  - document:
+      store: pinecone
+      key: metadata/chunk_key
+  - message:
+      store: input # required.  Input message, only a single input message is allowed.
+
+endpoints: # List of endpoints that are used for the bot.
+  submit: # Name of endpoint
+    prompt: # required.  chats that will be sent in this order to the ai_adapter
+    # Note that the ai_adapter will convert this 
+    # To a usable format for prompt based ai's this will be converted
+    # into a prompt seperated by line breaks (ai21 adapter)
+      - role: system
+        content: You are a Talmudic scholar who is using the Talmud to interpret questions, including those about modern life not contained explicitly in the original text.
+      - role: system
+        content: Using this section of the Talmud 
+      - role: system
+        content: _documentcontent_ at _document_
+      - role: system
+        content: The above text is pulled from the Babylonian Talmud. Using the text above, what interpretation might the Talmud offer with respect to the following question? If the Talmud does not contain an explicit answer, extrapolate a speculative answer.
+      - role: user
+        content: _message_
+  example:
+    interrogation: # Keyword Optional
+    # Interrogation will pass only the document selected.
+    # The generated response must be either yes or no.
+     - role: system
+       content: Does this _documentcontent_ answer the question _message_?
+    prompt:
+     - role: system
+       content: Using this _documentcontent_ answer _message_

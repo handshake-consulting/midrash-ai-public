@@ -1,0 +1,176 @@
+/**
+Author : Paul Turner
+Email : turner.paul.k@gmail.com
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the h1 tag */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #615e5e;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color: #eeebeb;
+  width: 100%;
+  z-index: 2;
+}
+
+#sign-out {
+  position: fixed;
+  left: calc(1em + 5px);
+  top: calc(1em + 5px);
+  background-color: #ffffff;
+  color: #444444;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#sign-out:hover {
+  background-color: #cccccc;
+}
+
+/* Style the firebaseui container */
+#firebaseui-auth-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.about {
+  position: absolute;
+  left: 0%;
+  top: calc(1rem + 2em + 1rem);
+  width: 30%;
+  flex: 1;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.about h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.about p {
+  font-size: 18px;
+  line-height: 1.25;
+  margin-bottom: 22px;
+}
+
+.about h1 + p {
+  margin-top: 0;
+}
+
+.chatbot-container {
+  position: absolute;
+  top: calc(1rem + 2em + 1rem); /* title height + margin */
+  left: 30%;
+  width: 70%;
+  bottom: 0;
+  background-color: #4e4b4b;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+}
+
+.chatbot-body {
+  padding: 10px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.chatbot-messages-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-message {
+  max-width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #3a3434;
+  color: #ffffff;
+}
+
+.chatbot-message.user {
+  align-self: flex-start;
+  background-color: #b7c0c2;
+  color: #000000;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  margin: 0 80px 1rem auto;
+}
+
+.chatbot-message.talmud {
+  align-self: flex-start;
+  background-color: #3a3434;
+  color: #ffffff;
+}
+
+.chatbot-message.from {
+  align-self: flex-start;
+  background-color: #3a3434;
+  color: #ffffff;
+}
+
+.chatbot-form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chatbot-input {
+  flex: 1;
+  height: 40px;
+  width: 500px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a3434;
+  color: #ccc;
+}
+
+.chatbot-submit-btn {
+  height: 40px;
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #666666;
+  color: #fff;
+  cursor: pointer;
+}
