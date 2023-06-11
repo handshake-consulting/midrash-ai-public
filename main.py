@@ -17,7 +17,7 @@ from app.sha_hash import hash_message_sha_256
 from app.openai_utils import get_openai_embeddings
 
 from config import PineconeConfig, OpenAIConfig, AI21Config, AppConfig
-from dotenv import load_dotenv
+
 storage_client = storage.Client()
 
 app = Flask(__name__)
@@ -29,6 +29,7 @@ def root():
     """ Render root """
     response = make_response(render_template('index.html'))
     response.set_cookie("username", str(uuid.uuid4()), httponly=True)
+    response.set_cookie("gtm_container", AppConfig.GTM_CONTAINER_ID)
     return response
 
 
