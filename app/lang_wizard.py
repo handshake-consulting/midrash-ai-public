@@ -308,11 +308,24 @@ class LangWizard:
             return ai_adapter.chat_stream(messages)
         return ai_adapter.chat(messages)
 
-    def store_interaction(self, message: str, keyword_replacements, storage_keys: List) -> Dict:
-        """ given a storage adapater store a message with contents and metadata """
+    def make_storeage_interaction(self,
+                                  message: str,
+                                  keyword_replacements,
+                                  storage_keys: List) -> Dict:
+        """ Create both the payload and primary key for storage. """
         payload = deepcopy(keyword_replacements)
         message_hash = hash_message_sha_256(message)
         keys = [message_hash] + storage_keys
+        return keys, payload
+
+    def store_interaction(self,
+                          message: str,
+                          keyword_replacements,
+                          storage_keys: List) -> Dict:
+        """ given a storage adapater store a message with contents and metadata """
+        keys, payload = self.make_storeage_interaction(message,
+                                                       keyword_replacements,
+                                                       storage_keys)
         self.storage_adapter.store(payload, keys)
         return {'key': keys, 'payload': payload}
 
@@ -356,14 +369,17 @@ class LangWizard:
         if found is False:
             output = ["There were no documents in my records that could answer that question."]
             keyword_replacements = self.keyword_nullification(keyword_replacements)
-            storage_json = self.store_interaction(message, keyword_replacements, storage_keys)
         else:
-            print(keyword_replacements)
-            storage_json = self.store_interaction(message, keyword_replacements, storage_keys)
             prompt = self.replace_prompt_text(prompt, keyword_replacements)
             output = self.batch_or_stream(prompt, ai_adapter)
 
         if self.storage_adapter:
             storage_json = self.store_interaction(message, keyword_replacements, storage_keys)
+        else:
+            keys, payload = self.make_storeage_interaction(message, keyword_replacements, storage_keys)
+            storage_json = {
+                "keys": keys,
+                "payload": payload
+            }
 
         return output, keyword_replacements, storage_json

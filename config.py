@@ -33,6 +33,9 @@ class AppConfig:
     FLASK_SECRET_KEY=os.getenv("FLASK_SECRET_KEY", "something")
     PORT=os.getenv("PORT", "8080")
 
+    # Export Data Location
+    BUCKET_NAME = os.getenv("BUCKET_NAME", "midrash-public")
+
     # Openai Streaming
     STREAM=os.getenv("STREAM", "True") == "True"
 
