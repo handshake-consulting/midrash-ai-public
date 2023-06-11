@@ -4,6 +4,8 @@ This ended up just being futurebot but with cloud run capabilities.
 
 **URL:** https://midrash.ai
 
+![AI and Faith](https://midrash.ai/static//images/aiandfaith.jpg) **X** ![Handshake](https://midrash.ai/static//images/handshake.jpg)
+
 ## Endpoints:
 
 ### 1. `/`
