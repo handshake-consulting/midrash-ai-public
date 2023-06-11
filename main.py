@@ -17,15 +17,17 @@ from app.sha_hash import hash_message_sha_256
 from app.openai_utils import get_openai_embeddings
 
 from config import PineconeConfig, OpenAIConfig, AI21Config, AppConfig
-
+from dotenv import load_dotenv
 storage_client = storage.Client()
 
 app = Flask(__name__)
 
+gtm_container_id = os.getenv("GTM_CONTAINER_ID")
+
 @app.route('/')
 def root():
     """ Render root """
-    return render_template('index.html')
+    return render_template('index.html',gtm_container_id=gtm_container_id)
 
 
 @app.errorhandler(404)

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Talmud Talks</title>
+    <title> Midrash.ai</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Talmud Talks">
+    <meta name="title" content="Midrash.ai">
     <meta name="description" content="This bot know's about the Talmud. Ask a question about it!">
     <meta property="og:type" content="website">
 <meta property="og:url" content="https://midrash.ai/">
-<meta property="og:title" content="Talmud Talks">
+<meta property="og:title" content="Midrash.ai">
 <meta property="og:description" content="This bot know's about the Talmud. Ask a question about it!">
 <meta property="og:image" content="{{ url_for('static', filename='images/handshake.jpg') }}">
 
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://metatags.io/">
-<meta property="twitter:title" content="Talmud Talks">
+<meta property="twitter:url" content="https://midrash.ai/">
+<meta property="twitter:title" content="Midrash.ai">
 <meta property="twitter:description" content="This bot know's about the Talmud. Ask a question about it!">
 <meta property="twitter:image" content="{{ url_for('static', filename='images/handshake.jpg') }}">
 
@@ -29,6 +29,17 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='dist/css/output.css') }}"
   />
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S57KQQ9P0J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ gtm_container_id }}');
+</script>
+
   </head>
   <body>
    <div >
@@ -41,9 +52,15 @@
         <div class="max-w-screen-xl mx-auto flex justify-between items-center relative">
        
           <div class="flex flex-row space-x-2 items-center justify-center">
-            <img src="{{ url_for('static', filename='/images/aiandfaith.jpg') }}" alt="Talmud Talks logo" class=" inline-block h-16 mx-auto mb-10 ">
+            <a href="https://aiandfaith.org" target="_blank">
+              <img src="{{ url_for('static', filename='/images/aiandfaith.jpg') }}" alt="Talmud Talks logo" class=" inline-block h-16 mx-auto mb-10 ">
+            </a>
+
             <p class="inline-block h-16 mx-auto   font-extrabold text-black">X</p>
-            <img src="{{ url_for('static', filename='/images/handshake.jpg') }}" alt="Talmud Talks logo" class=" inline-block h-16 mx-auto mb-10 ">
+            <a href="https://handshake.fyi" target="_blank">
+              <img src="{{ url_for('static', filename='/images/handshake.jpg') }}" alt="Talmud Talks logo" class=" inline-block h-16 mx-auto mb-10 ">
+            </a>
+
           </div>
         
       
@@ -52,9 +69,14 @@
       <div x-data="askQuestion()" class="mt-14 flex items-center justify-center ">
         <div class="w-full px-3 md:px-0 md:w-1/2 flex flex-col">
           <div class="text-center mb-10 space-y-4">
-            <h1 class="font-extrabold text-4xl">Talmud Talks</h1>
-            <p class="text-center text-xs"> This bot know's about the Talmud. Ask a question about it!</p>
-
+            <h1 class="font-extrabold text-4xl">Midrash.ai</h1>
+            <p class="text-center text-xs"> This bot combines generative AI models with the Babylonian Talmud to answer questions about the Babylonian Talmud. It is intended for research purposes only. We hope it provokes conversations about truth and interpretation in AI.</p>
+            <p class="text-center text-xs">
+              Questions and answers are collected by Handshake and AI and Faith. The questions are also transmitted to the companies hosting the AI models.
+            </p>
+            <p class="text-center text-xs">
+              Please approach with an open mind, and reach out any time if you have questions or ideas related to the project.
+            </p>
           </div>
           <form @submit.prevent="handleSubmit">
          
@@ -64,8 +86,8 @@
               <select 
               x-model="ai"
               class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-gray-600 focus:border-gray-600 focus:outline-none ">
-                <option value="openai">openai</option>
-                <option value="ai21">ai21</option>
+                <option value="openai">OpenAI</option>
+                <option value="ai21">AI21</option>
               </select>
               <div class="relative w-full">
                   <input type="text" id="search-dropdown" 
@@ -185,7 +207,7 @@
   <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
     x-data
-    x-html="`© ${new Date().getFullYear()} <a href='/' class='hover:underline'>Talmud Talks™</a>. All Rights Reserved.`">
+    x-html="`Built by <a href='https://handshake.fyi' target='_blank' class='underline'>Handshake</a> in partnership with <a href='https://aiandfaith.org/' target='_blank' class='underline'>AI and Faith</a> in June 2023. `">
 </span>
   <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
       <li>
