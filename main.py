@@ -22,14 +22,11 @@ storage_client = storage.Client()
 
 app = Flask(__name__)
 
-gtm_container_id = os.getenv("GTM_CONTAINER_ID")
-
 @app.route('/')
 def root():
     """ Render root """
-    response = make_response(render_template('index.html'))
+    response = make_response(render_template('index.html', gtm_container_id=AppConfig.GTM_CONTAINER_ID))
     response.set_cookie("username", str(uuid.uuid4()), httponly=True)
-    response.set_cookie("gtm_container", AppConfig.GTM_CONTAINER_ID)
     return response
 
 
