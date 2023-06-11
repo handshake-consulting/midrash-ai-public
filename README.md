@@ -19,11 +19,8 @@ This ended up just being futurebot but with cloud run capabilities.
 - **Methods:** `POST`
 - **Body:**
   - `message`: string
+  -`ai`: string (openai or ai)
 - **Returns:**
-  - JSON: {
-      - `message`: "some error message",
-      - `ai`: enum[openai, ai]
-    }
   - Stream text good response, text/plain stream
 
 ### 3. `/content`
