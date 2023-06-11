@@ -1,44 +1,39 @@
-# futurebot-submit
+# Midrash AI Public
 
 This ended up just being futurebot but with cloud run capabilities.
 
-url = https://interrogate-and-question-sad5uoukha-uc.a.run.app/
+**URL:** https://midrash.ai
 
-endpoints = {
-  "/": {
-    "methods": ["GET"],
-    "returns": [index, javascript, images]
-  }
+## Endpoints:
 
-  "/uploadfile": {
-    "methods": ["GET"],
-    "returns": [index, javascript, images]
-  }
+### 1. `/`
 
-  "/submit": {
-    "methods": ["POST"],
-    "body": {"message": str},
-    "returns": [Json : {
-      "message": "some error message"
-    },
-      stream text good response, text/plain stream]
-  }
+- **Methods:** `GET`
+- **Returns:**
+  - index
+  - JavaScript
+  - images
 
-  "/content": {
-    "methods": ["POST"],
-    "body": {"message": str},
-    "returns": {
-    document: document title
-    documentcontent: document content
-    input_id: "i"
-    message : message equal to the message sent
-    pinecone: hash of the message, id in pinecone
+### 2. `/submit`
+
+- **Methods:** `POST`
+- **Body:**
+  - `message`: string
+- **Returns:**
+  - JSON: {
+      - `message`: "some error message",
+      - `ai`: enum[openai, ai]
     }
-  }
+  - Stream text good response, text/plain stream
 
-  "/upload": {
-    "methods": ["POST"],
-    "body": file object,
-    "returns": [json response "message":"file uploaded"]
-  }
-}
+### 3. `/content`
+
+- **Methods:** `POST`
+- **Body:**
+  - `message`: string
+- **Returns:**
+  - `document`: document title
+  - `documentcontent`: document content
+  - `input_id`: "i"
+  - `message`: message equal to the message sent
+  - `pinecone`: hash of the message, id in pinecone

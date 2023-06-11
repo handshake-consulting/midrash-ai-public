@@ -48,7 +48,6 @@ function askQuestion() {
           body: JSON.stringify({
             message: this.searchValue,
             ai: this.ai,
-            // token:this.token,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -73,8 +72,7 @@ function askQuestion() {
         while (true) {
           const { value, done } = await reader.read();
           if (done) {
-            // Alpine.store('globalState').toggleAnswer();
-            // console.log('Reference Content ',this.refcontent.trim());
+
             if (this.refcontent.trim() !== "") {
               Alpine.store("globalState").toggleReference(true);
             }
@@ -88,7 +86,6 @@ function askQuestion() {
       } catch (error) {
         // Check if the error is caused by request cancellation
         if (error.name === "AbortError") {
-          // console.log("Request cancelled");
           this.isLoading = false;
           this.statusMessage = "Request cancelled";
           this.isWaiting = false;
@@ -101,20 +98,19 @@ function askQuestion() {
       }
     },
     async getContent(userprompt) {
-      // console.log('start running - ',userprompt);
       try {
         const response = await fetch("/content", {
           method: "POST",
           body: JSON.stringify({
             message: userprompt,
-            // token:this.token,
           }),
           headers: {
             "Content-Type": "application/json",
           },
         });
         const data = await response.json();
-        //    console.log(data)
+
+        // checks if response returns empty reference data , do nothing if data is empty
         if (data.documentcontent.toString().replace(",", " ") !== "") {
           this.refcontent = data.documentcontent.toString().replace(",", " ");
           this.reference = data.document.toString().replace(",", " ");
