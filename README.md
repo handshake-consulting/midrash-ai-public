@@ -4,7 +4,7 @@ This ended up just being futurebot but with cloud run capabilities.
 
 **URL:** https://midrash.ai
 
-![AI and Faith](https://midrash.ai/static/images/aiandfaith.jpg) **X** ![Handshake](https://midrash.ai/static/images/handshake.jpg)
+<img src="https://midrash.ai/static//images/aiandfaith.jpg" alt="AI and Faith" height="80" width="80"> **X** <img src="https://midrash.ai/static//images/handshake.jpg" alt="Handshake" height="80" width="80">
 
 ## Endpoints:
 
