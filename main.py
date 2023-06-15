@@ -1,9 +1,9 @@
 """ Chatbot server """
 import os
 import time
-from flask import Flask, jsonify, Response, request
+import uuid
+from flask import Flask, jsonify, Response, request, make_response
 from flask import render_template
-# import uuid
 
 from google.cloud import storage
 from google.api_core.exceptions import NotFound
@@ -25,7 +25,9 @@ app = Flask(__name__)
 @app.route('/')
 def root():
     """ Render root """
-    return render_template('index.html')
+    response = make_response(render_template('index.html', gtm_container_id=AppConfig.GTM_CONTAINER_ID))
+    response.set_cookie("username", str(uuid.uuid4()), httponly=True)
+    return response
 
 
 @app.errorhandler(404)
@@ -62,8 +64,9 @@ def content():
     retry_number = 0
     while active_retry:
         try:
-            bucket_storage = GoogleBucketStorage(storage_client, "content_identification")
-            dirty_payload = bucket_storage.fetch([message_hash, username] + PineconeConfig.PINECONE_NAMESPACES)
+            bucket_storage = GoogleBucketStorage(storage_client, AppConfig.BUCKET_NAME)
+            dirty_payload = bucket_storage.fetch([message_hash, username] \
+                                                 + PineconeConfig.PINECONE_NAMESPACES)
             response = jsonify(dirty_payload)
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response
@@ -74,7 +77,8 @@ def content():
             if retry_number > 10:
                 active_retry = False
     response = jsonify({
-        "message": "Failed to find file.  This is usually due to this function being called too quickly."
+        "message": "Failed to find file.  This is usually \
+                    due to this function being called too quickly."
         })
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
@@ -101,6 +105,8 @@ def submit():
     #     return response
     message = json_data['message']
     username = request.cookies.get("username")
+    if username is None:
+        username = "NoTrackUsername"
 
     pinecone_adapter = PineconeDatabaseAdapter(PineconeConfig, get_openai_embeddings, False)
     if "namespace" in json_data:
@@ -112,28 +118,34 @@ def submit():
 
     openai_adapter = OpenAIAdapter(OpenAIConfig)
     ai21_adapter = Ai21Adapter(AI21Config)
-    bucket_storage = GoogleBucketStorage(storage_client, "content_identification")
+    bucket_storage = GoogleBucketStorage(storage_client, AppConfig.BUCKET_NAME)
 
     wizard = LangWizard(endpoints_yaml_path='endpoints.yaml',
                         rollback_query_max=1,
                         surrounding_special="__",
                         ai_adapters={"openai": openai_adapter, "ai21": ai21_adapter},
                         pinecone_adapter=pinecone_adapter,
-                        storage_adapter=bucket_storage,
+                        storage_adapter=None,
                         rollback_token_length=3500)
 
     namespace_key = "|".join(pinecone_adapter.get_selected_namespaces())
-    output, _, _ = wizard.endpoint_responce('submit',
+    output, _, storage_json = wizard.endpoint_responce('submit',
                                             message=message,
                                             storage_keys=[username, namespace_key],
                                             ai_adapter=ai_name)
 
     if AppConfig.STREAM:
         print("STREAMING")
-        def response_generator(output):
+        def response_generator(output, storage_json, storage_adapter):
+            output_total = ""
             for chunk in output:
+                output_total += chunk
                 yield chunk
-        return Response(response_generator(output),
+            payload = storage_json['payload']
+            payload['output'] = output_total
+            storage_adapter.store(payload, storage_json['keys'])
+
+        return Response(response_generator(output, storage_json, bucket_storage),
                         mimetype='text/event-stream',
                         headers={'X-Accel-Buffering': 'no',
                                  'Access-Control-Allow-Origin': '*'})

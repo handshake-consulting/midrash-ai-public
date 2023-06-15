@@ -33,10 +33,14 @@ class AppConfig:
     FLASK_SECRET_KEY=os.getenv("FLASK_SECRET_KEY", "something")
     PORT=os.getenv("PORT", "8080")
 
+    # Export Data Location
+    BUCKET_NAME = os.getenv("BUCKET_NAME", "midrash-public")
+
     # Openai Streaming
     STREAM=os.getenv("STREAM", "True") == "True"
 
     # Google specific variables
+    GTM_CONTAINER_ID=os.getenv("GTM_CONTAINER_ID", None)
     GOOGLE_CLIENT_ID=os.getenv("GOOGLE_CLIENT_ID", None)
     GOOGLE_CLIENT_SECRET=os.getenv("GOOGLE_CLIENT_SECRET", None)
 
