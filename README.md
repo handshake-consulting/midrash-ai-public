@@ -5,8 +5,7 @@ Midrash.ai is an experiment to explore the meaning of “truth” and “bias”
 -- Do we situate bias in a generative model in its ability to describe its underlying distribution, or its accordance with proper moral effect? 
 -- The Talmud is an explicit “source of truth” in that its underlying values are directly declared. How does this help us examine the same questions for systems in which the underlying value systems are implicit, un-declared, or deliberately obscured?
 
-For a hosted version of Midrash.ai, please click the link below.
-**URL:** https://midrash.ai
+You can access a hosted version of Midrash.ai here: https://midrash.ai
 
 Midrash.ai is a partnership between Handshake (https://handshake.fyi) and AI and Faith (https://aiandfaith.org).
 
