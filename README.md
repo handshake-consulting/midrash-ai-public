@@ -9,6 +9,9 @@ You can access a hosted version of Midrash.ai here: https://midrash.ai
 
 Midrash.ai is a partnership between Handshake (https://handshake.fyi) and AI and Faith (https://aiandfaith.org).
 
+Midrash.ai is based on an English translation of the Babylonian Talmud by Michael L Rodkinson. The original PDF, and the OCR'd text, can be found here:
+https://drive.google.com/drive/u/0/folders/176M_zubz3AktyL1H4wq8_7l6IpWOsLWw
+
 MidrashBot uses a fairly standard architecture of retrieval-enhanced generation to produce its answers. An edition of the Babylonian Talmud is programmatically divided into chunks that are converted into searchable “embeddings.” When a question is posed to the system, it appends chunks into the prompt whose embeddings fall below a minimum vector distance from the question.
 
 
