@@ -2,7 +2,7 @@
 
 Note: This was made for a conceptual research project in early 2023 and has not been updated since then. It is here for archival purposes only.
 
-Midrash.ai is an experiment to explore the meaning of “truth” and “bias” in AI chatbots, using the Babylonian Talmud as an example. The Talmud is considered by some to be the canon interpretation of the Torah, which is in turn considered to be the source of absolute truth. The Talmud provides us with several useful characteristics to explore questions of bias and truth in AI chatbots:
+Midrash.ai is an experiment to explore the meaning of “truth” and “bias” in AI chatbots, using the Babylonian Talmud as an example. The Talmud is considered by some to be a canon interpretation of the Torah, which is in turn considered to be the source of absolute truth. The Talmud provides us with several useful characteristics to explore questions of bias and truth in AI chatbots:
 -- Who are appropriate validators of truth? (e.g. Religious officials, The “crowd”, Ourselves)
 -- Do we situate bias in a generative model in its ability to describe its underlying distribution, or its accordance with proper moral effect? 
 -- The Talmud is an explicit “source of truth” in that its underlying values are directly declared. How does this help us examine the same questions for systems in which the underlying value systems are implicit, un-declared, or deliberately obscured?
